@@ -1,0 +1,7 @@
+C:/Users/moroc/Desktop/parcial/build-parcial-Desktop-Debug/CMakeFiles/parcial.dir
+C:/Users/moroc/Desktop/parcial/build-parcial-Desktop-Debug/CMakeFiles/edit_cache.dir
+C:/Users/moroc/Desktop/parcial/build-parcial-Desktop-Debug/CMakeFiles/rebuild_cache.dir
+C:/Users/moroc/Desktop/parcial/build-parcial-Desktop-Debug/CMakeFiles/list_install_components.dir
+C:/Users/moroc/Desktop/parcial/build-parcial-Desktop-Debug/CMakeFiles/install.dir
+C:/Users/moroc/Desktop/parcial/build-parcial-Desktop-Debug/CMakeFiles/install/local.dir
+C:/Users/moroc/Desktop/parcial/build-parcial-Desktop-Debug/CMakeFiles/install/strip.dir
