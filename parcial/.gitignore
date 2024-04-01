@@ -1,6 +1,6 @@
 # This file is used to ignore files which are generated
 # ----------------------------------------------------------------------------
-
+../build-parcial-Desktop-Debug/
 *~
 *.autosave
 *.a
@@ -59,6 +59,7 @@ CMakeLists.txt.user*
 *.opensdf
 *.vcxproj
 *vcxproj.*
+.vscode
 
 # MinGW generated files
 *.Debug
