@@ -5,7 +5,9 @@ project(parcial LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(parcial main.cpp)
+add_executable(parcial main.cpp
+    funciones.h
+    funciones.cpp)
 
 include(GNUInstallDirs)
 install(TARGETS parcial
