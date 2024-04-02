@@ -15,11 +15,18 @@ int main()
     //rellenamos la estructura M
     llenarEstructura();
     //mostramos la matriz;
-    mostrarMatriz(punteroMatriz,tamaño);
+    mostrarMatriz(punteroMatriz,tamaño); //podemos comentar la matriz orginal M
+    srand(time(nullptr));
+    // Generamos un número aleatorio entre 1 y 3 para indicar cuántas veces girar la matriz a la izquierda
+    int veces = rand() % 3 + 1; // Genera un número aleatorio en el rango [1, 3]
+    cout << "\nLa matriz de rotacion " << veces <<  endl;
 
+    // Giramos la matriz a la izquierda el número de veces aleatorio
+    girarIzquierda(punteroMatriz, tamaño, veces);
 
-
-
+    // Mostramos la matriz girada
+    cout << "\nMatriz rotada:" << endl;
+    mostrarMatriz(punteroMatriz,tamaño);//IMPRIME LA MATRIZ ROTADA
 
     //liberamos la memoria usada para las columnas
     for(int i = 0; i<tamaño ; i++){
@@ -94,7 +101,6 @@ void mostrarMatriz(int **punteroMatriz, int tamaño) {
         cout << endl;
     }
 }
-
 
 
 
