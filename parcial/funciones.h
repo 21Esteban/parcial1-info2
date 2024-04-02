@@ -9,5 +9,7 @@ using namespace std;
 
 void pedirDatos();
 void crearEstructura();
+void llenarEstructura();
+void mostrarMatriz(int **punteroMatriz,int tamaño);
 
 #endif // FUNCIONES_H
