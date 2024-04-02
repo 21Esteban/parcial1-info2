@@ -58,7 +58,7 @@ void pedirDatos() {
 
 void crearEstructura(){
 
-    punteroMatriz = new int*[tamaño]; //reservamos memoria para las filas
+    punteroMatriz = new int *[tamaño]; //reservamos memoria para las filas
     for(int i = 0 ;i < tamaño ; i++){
         punteroMatriz[i] = new int [tamaño];//reservamos memoria para las columnas
     }
@@ -72,31 +72,27 @@ void llenarEstructura(){
 
     centro = tamaño/2;
 
-    for(int i = 0 ; i <tamaño ; i++){
-        for(int j = 0; j < tamaño ; j++){
-
-            if( centro  == i  && centro  == j ){
-                punteroMatriz[i][j]=0;
-
-            }else{
-            punteroMatriz[i][j]=variableDeLLenado;
-            variableDeLLenado++;
+    for (int i = 0; i < tamaño; i++) {
+        for (int j = 0; j < tamaño; j++) {
+            if (centro == i && centro == j) {
+                punteroMatriz[i][j] = 0;
+            } else {
+                punteroMatriz[i][j] = variableDeLLenado++;
             }
         }
     }
 }
-
-void mostrarMatriz(int **punteroMatriz,int tamaño){
-
-    for(int i = 0 ; i <tamaño ; i++){
-        for(int j = 0; j < tamaño ; j++){
-
-           // cout<<punteroMatriz[i][j];
-            cout<<*(*(punteroMatriz+i)+j); //cualquiera de las 2 formas nos sirve
+void mostrarMatriz(int **punteroMatriz, int tamaño) {
+    for (int i = 0; i < tamaño; i++) {
+        for (int j = 0; j < tamaño; j++) {
+            if (punteroMatriz[i][j] == 0) {
+                cout << "   "; // Imprime tres espacios en lugar de 0 para mantener la misma cantidad de caracteres
+            } else {
+                cout << punteroMatriz[i][j] << "  "; // Imprime el valor de la matriz seguido de dos espacios adicionales
+            }
         }
-        cout<<endl;
-}
-
+        cout << endl;
+    }
 }
 
 
