@@ -92,10 +92,16 @@ void mostrarMatriz(int **punteroMatriz,int tamaño){
         for(int j = 0; j < tamaño ; j++){
 
            // cout<<punteroMatriz[i][j];
-            cout<<*(*(punteroMatriz+i)+j); //cualquiera de las 2 formas nos sirve
+             cout<<" "<<*(*(punteroMatriz+i)+j)<<" "; //cualquiera de las 2 formas nos sirve
+
+
         }
         cout<<endl;
 }
+
+}
+
+void rotarMatriz(int **punteroMatriz){
 
 }
 
