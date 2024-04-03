@@ -15,11 +15,18 @@ int main()
     //rellenamos la estructura M
     llenarEstructura();
     //mostramos la matriz;
-    mostrarMatriz(punteroMatriz,tamaño);
+    mostrarMatriz(punteroMatriz,tamaño); //podemos comentar la matriz orginal M
+    srand(time(nullptr));
+    // Generamos un número aleatorio entre 1 y 3 para indicar cuántas veces girar la matriz a la izquierda
+    int veces = rand() % 3 + 1; // Genera un número aleatorio en el rango [1, 3]
+    cout << "\nLa matriz de rotacion " << veces <<  endl;
 
+    // Giramos la matriz a la izquierda el número de veces aleatorio
+    girarIzquierda(punteroMatriz, tamaño, veces);
 
-
-
+    // Mostramos la matriz girada
+    cout << "\nMatriz rotada:" << endl;
+    mostrarMatriz(punteroMatriz,tamaño);//IMPRIME LA MATRIZ ROTADA
 
     //liberamos la memoria usada para las columnas
     for(int i = 0; i<tamaño ; i++){
@@ -58,7 +65,7 @@ void pedirDatos() {
 
 void crearEstructura(){
 
-    punteroMatriz = new int*[tamaño]; //reservamos memoria para las filas
+    punteroMatriz = new int *[tamaño]; //reservamos memoria para las filas
     for(int i = 0 ;i < tamaño ; i++){
         punteroMatriz[i] = new int [tamaño];//reservamos memoria para las columnas
     }
@@ -72,39 +79,34 @@ void llenarEstructura(){
 
     centro = tamaño/2;
 
-    for(int i = 0 ; i <tamaño ; i++){
-        for(int j = 0; j < tamaño ; j++){
-
-            if( centro  == i  && centro  == j ){
-                punteroMatriz[i][j]=0;
-
-            }else{
-            punteroMatriz[i][j]=variableDeLLenado;
-            variableDeLLenado++;
+    for (int i = 0; i < tamaño; i++) {
+        for (int j = 0; j < tamaño; j++) {
+            if (centro == i && centro == j) {
+                punteroMatriz[i][j] = 0;
+            } else {
+                punteroMatriz[i][j] = variableDeLLenado++;
             }
         }
     }
 }
 
-void mostrarMatriz(int **punteroMatriz,int tamaño){
-
-    for(int i = 0 ; i <tamaño ; i++){
-        for(int j = 0; j < tamaño ; j++){
-
-           // cout<<punteroMatriz[i][j];
-             cout<<" "<<*(*(punteroMatriz+i)+j)<<" "; //cualquiera de las 2 formas nos sirve
-
+void mostrarMatriz(int **punteroMatriz, int tamaño) {
+    for (int i = 0; i < tamaño; i++) {
+        for (int j = 0; j < tamaño; j++) {
+            if (punteroMatriz[i][j] == 0) {
+                cout << "   "; // Imprime tres espacios en lugar de 0 para mantener la misma cantidad de caracteres
+            } else {
+                cout << punteroMatriz[i][j] << "  "; // Imprime el valor de la matriz seguido de dos espacios adicionales
+            }
 
         }
-        cout<<endl;
-}
-
+        cout << endl;
+    }
 }
 
 void rotarMatriz(int **punteroMatriz){
 
 }
-
 
 
 
