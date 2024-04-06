@@ -2,8 +2,9 @@
 
 //Variables Globales
 
-int **punteroMatriz,tamaño;
+int **punteroMatriz,tamaño; int *reglaK;
 
+//cerradura K
 
 int main()
 {
@@ -16,17 +17,10 @@ int main()
     llenarEstructura();
     //mostramos la matriz;
     mostrarMatriz(punteroMatriz,tamaño); //podemos comentar la matriz orginal M
-    srand(time(nullptr));
-    // Generamos un número aleatorio entre 1 y 3 para indicar cuántas veces girar la matriz a la izquierda
-    int veces = rand() % 3 + 1; // Genera un número aleatorio en el rango [1, 3]
-    cout << "\nLa matriz de rotacion " << veces <<  endl;
+    pedirClaveK();
 
-    // Giramos la matriz a la izquierda el número de veces aleatorio
-    girarIzquierda(punteroMatriz, tamaño, veces);
 
-    // Mostramos la matriz girada
-    cout << "\nMatriz rotada:" << endl;
-    mostrarMatriz(punteroMatriz,tamaño);//IMPRIME LA MATRIZ ROTADA
+
 
     //liberamos la memoria usada para las columnas
     for(int i = 0; i<tamaño ; i++){
@@ -43,71 +37,145 @@ int main()
 }
 
 
-void pedirDatos() {
-    bool datoCorrecto = false;
 
-    while (!datoCorrecto) {
-        cout << "Ingrese el tamano de la estructura M (desde 3x3 hasta 9x9 el numero debe ser impar): ";
-        cin >> tamaño;
 
-        //validacion
-        if (tamaño % 2 == 1 && tamaño >= 3 && tamaño <= 9) {
-            datoCorrecto = true;
-        } else {
 
-            cout << "Digite un valor correcto (3, 5, 7, 9)" << endl;
-        }
-    }
+
+
+
+
+
+
+
+
+//Funciones para validar la regla K
+
+//El enfoque que vamos a utilizar es , el usuario va a ingresar la fila y la columna , de acuerdo a eso vamos a hacer una matriz de prueba para validar si podemos usar en la primera matriz la matriz minima (3x3) si el usuario da en el centro de la matriz entonces la primera estructura ya no va a ser de 3x3 sino de 5x5 y asi sucesivamente
+
+void validarReglaK(){
+
+   //definimos estas variables y las pasamos por referencia en la funcion pedir clave porque las necesitamos en esta funcion.
+
+
+
+
+
+    //Funcion que valida la regla dada pra la primera estructura
+
+
+
 
 
 }
 
 
-void crearEstructura(){
+/*void pedirClaveK(){
+    int tamañok ;
+    int fila;
+    int columna;
+    int valor;
 
-    punteroMatriz = new int *[tamaño]; //reservamos memoria para las filas
-    for(int i = 0 ;i < tamaño ; i++){
-        punteroMatriz[i] = new int [tamaño];//reservamos memoria para las columnas
-    }
+    cout<<"----Ingrese la clave para generar una cerradura para esa Clave---- \n que tamaño va a tener la cerradura : ";
+    cin>>tamañok;
 
-}
+    //generamos el arreglo que va a contener la regla K
+
+    reglaK = new int[tamañok+1];
 
 
-void llenarEstructura(){
+    for (int i = 0 ; i <= tamañok ; i ++){
 
-    int variableDeLLenado = 1; int centro;
+        if(i == 0){
+            bool filaValida = false;
+            int PrimeraVez = true;
 
-    centro = tamaño/2;
+            while(!filaValida){
+                cout<<(PrimeraVez ? "Ingrese la fila : " : "La fila debe ser un numero positivo")<<endl;
+                cin>>fila;
+                if(fila > 0){
+                    reglaK[0] = fila;
+                    filaValida = true;
+                }
+                else {
+                    PrimeraVez = false;
+                }
 
-    for (int i = 0; i < tamaño; i++) {
-        for (int j = 0; j < tamaño; j++) {
-            if (centro == i && centro == j) {
-                punteroMatriz[i][j] = 0;
-            } else {
-                punteroMatriz[i][j] = variableDeLLenado++;
+
             }
         }
-    }
-}
 
-void mostrarMatriz(int **punteroMatriz, int tamaño) {
-    for (int i = 0; i < tamaño; i++) {
-        for (int j = 0; j < tamaño; j++) {
-            if (punteroMatriz[i][j] == 0) {
-                cout << "   "; // Imprime tres espacios en lugar de 0 para mantener la misma cantidad de caracteres
-            } else {
-                cout << punteroMatriz[i][j] << "  "; // Imprime el valor de la matriz seguido de dos espacios adicionales
+        else if(i == 1){
+            bool columnaValida = false;
+            int PrimeraVez = true;
+
+            while(!columnaValida){
+                cout<<(PrimeraVez ? "Ingrese la columna : " : "La columna debe ser un numero positivo")<<endl;
+                cin>>columna;
+                if(columna > 0){
+                    reglaK[1] = columna;
+                    columnaValida = true;
+                }
+                else {
+                    PrimeraVez = false;
+                }
+
+
             }
 
         }
-        cout << endl;
+
+        else{
+            bool valorValido = false;
+            int PrimeraVez = true;
+
+            while(!valorValido){
+                cout<<(PrimeraVez ? "Ingrese el valor o condicion con respecto a la siguiente estructura : " : "la condicion debe estar en el rango -1 , 0 , 1")<<endl;
+                cin>>valor;
+                if(valor > 0){
+                    reglaK[i] = valor;
+                    valorValido = true;
+                }
+                else {
+                    PrimeraVez = false;
+                }
+
+
+            }
+
+        }
+
+
+
     }
-}
-
-void rotarMatriz(int **punteroMatriz){
 
 }
+*/
 
 
 
+
+
+
+//hay que eliminar la memoria de regla K al final
+
+/*int arreglo[3][3][3] = {
+    {
+        // Matriz 1
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    },
+    {
+        // Matriz 2
+        {9, 8, 7},
+        {6, 5, 4},
+        {3, 2, 1}
+    },
+    {
+        // Matriz 3
+        {0, 0, 0},
+        {0, 0, 0},
+        {0, 0, 0}
+    }
+};*/
 

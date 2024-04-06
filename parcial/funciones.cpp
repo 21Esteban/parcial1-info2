@@ -1,5 +1,71 @@
 #include "funciones.h"
 
+void crearEstructura(){
+
+    punteroMatriz = new int *[tamaño]; //reservamos memoria para las filas
+    for(int i = 0 ;i < tamaño ; i++){
+        punteroMatriz[i] = new int [tamaño];//reservamos memoria para las columnas
+    }
+
+}
+
+
+
+void pedirDatos() {
+    bool datoCorrecto = false;
+
+    while (!datoCorrecto) {
+        cout << "Ingrese el tamano de la estructura M (desde 3x3 hasta 9x9 el numero debe ser impar): ";
+        cin >> tamaño;
+
+        //validacion
+        if (tamaño % 2 == 1 && tamaño >= 3 && tamaño <= 9) {
+            datoCorrecto = true;
+        } else {
+
+            cout << "Digite un valor correcto (3, 5, 7, 9)" << endl;
+        }
+    }
+
+
+
+}
+
+
+
+void llenarEstructura(){
+
+    int variableDeLLenado = 1; int centro;
+
+    centro = tamaño/2;
+
+    for (int i = 0; i < tamaño; i++) {
+        for (int j = 0; j < tamaño; j++) {
+            if (centro == i && centro == j) {
+                punteroMatriz[i][j] = 0;
+            } else {
+                punteroMatriz[i][j] = variableDeLLenado++;
+            }
+        }
+    }
+}
+
+
+void mostrarMatriz(int **punteroMatriz, int tamaño) {
+    for (int i = 0; i < tamaño; i++) {
+        for (int j = 0; j < tamaño; j++) {
+            if (punteroMatriz[i][j] == 0) {
+                cout << "   "; // Imprime tres espacios en lugar de 0 para mantener la misma cantidad de caracteres
+            } else {
+                cout << punteroMatriz[i][j] << "  "; // Imprime el valor de la matriz seguido de dos espacios adicionales
+            }
+
+        }
+        cout << endl;
+    }
+}
+
+
 void girarIzquierda(int **punteroMatriz, int tamaño, int veces)
 {
     for (int k = 0; k < veces; ++k)
@@ -32,3 +98,90 @@ void girarIzquierda(int **punteroMatriz, int tamaño, int veces)
         delete[] temp;
     }
 }
+
+
+//---------------------------------------------------------------//
+
+//MODULO DE VALIDACION //Regla k
+
+void pedirClaveK(){
+    int tamañok ;
+    int fila;
+    int columna;
+    int valor;
+
+    cout<<"------  Ingrese la clave para generar una cerradura para esa Clave  ------ \n Cual es el tamano que va a tener la cerradura : ";
+    cin>>tamañok;
+
+    //generamos el arreglo que va a contener la regla K
+
+    reglaK = new int[tamañok+1];
+
+
+    for (int i = 0 ; i <= tamañok ; i ++){
+
+        if(i == 0){
+            bool filaValida = false;
+            int PrimeraVez = true;
+
+            while(!filaValida){
+                cout<<(PrimeraVez ? "Ingrese la fila : " : "La fila debe ser un numero positivo \n Ingrese nuevamente la columna :  ")<<endl;
+                cin>>fila;
+                if(fila > 0){
+                    reglaK[0] = fila;
+                    filaValida = true;
+                }
+                else {
+                    PrimeraVez = false;
+                }
+
+
+            }
+        }
+
+        else if(i == 1){
+            bool columnaValida = false;
+            int PrimeraVez = true;
+
+            while(!columnaValida){
+                cout<<(PrimeraVez ? "Ingrese la columna : " : "La columna debe ser un numero positivo \n Ingrese nuevamente la columna : ")<<endl;
+                cin>>columna;
+                if(columna > 0){
+                    reglaK[1] = columna;
+                    columnaValida = true;
+                }
+                else {
+                    PrimeraVez = false;
+                }
+
+
+            }
+
+        }
+
+        else{
+            bool valorValido = false;
+            int PrimeraVez = true;
+
+            while(!valorValido){
+                cout<<(PrimeraVez ? "Ingrese el valor o condicion de la celda de la matriz " + to_string(i-1) + " con respecto a la siguiente estructura " + to_string(i) + " (Matriz)  : " : "la condicion debe estar en el rango -1 , 0 , 1 . \n Ingrese nuevamente el valor : ")<<endl;
+                cin>>valor;
+                if(valor == 0 || valor == 1 || valor == -1 ){
+                    reglaK[i] = valor;
+                    valorValido = true;
+                }
+                else {
+                    PrimeraVez = false;
+                }
+
+
+            }
+
+        }
+
+
+
+    }
+
+}
+
