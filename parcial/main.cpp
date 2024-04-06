@@ -104,6 +104,7 @@ void validarReglaK(){
             }
         }
 
+
         else if(i == 1){
             bool columnaValida = false;
             int PrimeraVez = true;
@@ -118,6 +119,7 @@ void validarReglaK(){
                 else {
                     PrimeraVez = false;
                 }
+
 
 
             }
