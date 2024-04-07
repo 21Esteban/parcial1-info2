@@ -5,11 +5,28 @@
 #include <ctime>
 using namespace std;
 
+
+//int **punteroMatriz,tamaño; int *reglaK;
+extern int *reglaK;extern int ***cerraduraX;extern int tamañoK;
+
+
 //prototipos
 
-void pedirDatos();
-void crearEstructura();
-void llenarEstructura();
+// void pedirDatos();
+int **crearEstructura(int tamaño);
+void llenarEstructura(int **punteroMatriz,int tamaño);
 void mostrarMatriz(int **punteroMatriz,int tamaño);
 void girarIzquierda(int **punteroMatriz, int tamaño, int veces);
+
+void pedirClaveK();
+void generadorDeEstructuraX();
+// void crearEstructuraGenerica(int tamaño1);
+
+bool esCentro(int fila, int columna, int tamañoMatriz);
+bool esValida(int fila, int columna, int tamañoMatriz);
+//variables globales
+
+
+
+
 #endif // FUNCIONES_H

@@ -2,106 +2,103 @@
 
 //Variables Globales
 
-int **punteroMatriz,tamaño;
+int *reglaK; int ***cerraduraX;int tamañoK;
 
+//cerradura K
 
 int main()
 {
 
     //pedimos los datos para rellenar la estructura M
-    pedirDatos();
+    // pedirDatos();
     //creamos la estructura M
-    crearEstructura();
+    // crearEstructura();
     //rellenamos la estructura M
-    llenarEstructura();
+    // llenarEstructura();
     //mostramos la matriz;
-    mostrarMatriz(punteroMatriz,tamaño); //podemos comentar la matriz orginal M
-    srand(time(nullptr));
-    // Generamos un número aleatorio entre 1 y 3 para indicar cuántas veces girar la matriz a la izquierda
-    int veces = rand() % 3 + 1; // Genera un número aleatorio en el rango [1, 3]
-    cout << "\nLa matriz de rotacion " << veces <<  endl;
+    // mostrarMatriz(punteroMatriz,tamaño); //podemos comentar la matriz orginal M
+    pedirClaveK();
+    generadorDeEstructuraX();
 
-    // Giramos la matriz a la izquierda el número de veces aleatorio
-    girarIzquierda(punteroMatriz, tamaño, veces);
 
-    // Mostramos la matriz girada
-    cout << "\nMatriz rotada:" << endl;
-    mostrarMatriz(punteroMatriz,tamaño);//IMPRIME LA MATRIZ ROTADA
 
     //liberamos la memoria usada para las columnas
-    for(int i = 0; i<tamaño ; i++){
-        delete[]  punteroMatriz[i] ;
-    }
+    // for(int i = 0; i<tamaño ; i++){
+    //     delete[]  punteroMatriz[i] ;
+    // }
 
     //ahora liberamos las filas
 
-    delete[] punteroMatriz;
+    // delete[] punteroMatriz;
 
     return 0;
-    
+
 
 }
 
 
-void pedirDatos() {
-    bool datoCorrecto = false;
 
-    while (!datoCorrecto) {
-        cout << "Ingrese el tamano de la estructura M (desde 3x3 hasta 9x9 el numero debe ser impar): ";
-        cin >> tamaño;
+//Funciones para validar la regla K
 
-        //validacion
-        if (tamaño % 2 == 1 && tamaño >= 3 && tamaño <= 9) {
-            datoCorrecto = true;
-        } else {
+//El enfoque que vamos a utilizar es , el usuario va a ingresar la fila y la columna , de acuerdo a eso vamos a hacer una matriz de prueba para validar si podemos usar en la primera matriz la matriz minima (3x3) si el usuario da en el centro de la matriz entonces la primera estructura ya no va a ser de 3x3 sino de 5x5 y asi sucesivamente
 
-            cout << "Digite un valor correcto (3, 5, 7, 9)" << endl;
-        }
+
+// void generadorDeEstructuraX(){
+
+//     //Generamos una matriz estandar para evaluar si nos sirve para la cerradura X
+//     int num = 3; //Esta variable es el minimo de la matriz y si no se puede por la 3x3 sumamos 2 para probar con la 5x5
+
+//     bool matrizValida = false;
+
+//     while(!matrizValida){
+
+
+//         if(esCentro(reglaK[0], reglaK[1] , num) && esValida(reglaK[0], reglaK[1] , num)){
+//             matrizValida = true;
+//             cout<<"entre"<<endl;
+
+//         }else{
+//             num = num + 2;
+//             cout<<"le sume 2"<<endl;
+//         }
+
+
+
+//     }
+
+
+//     cout<<"Matriz valida la "<< num << " x "<< num <<endl;
+
+
+
+// }
+
+
+
+
+
+
+
+//hay que eliminar la memoria de regla K al final
+
+/*int arreglo[3][3][3] = {
+    {
+        // Matriz 1
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    },
+    {
+        // Matriz 2
+        {9, 8, 7},
+        {6, 5, 4},
+        {3, 2, 1}
+    },
+    {
+        // Matriz 3
+        {0, 0, 0},
+        {0, 0, 0},
+        {0, 0, 0}
     }
-
-
-}
-
-
-void crearEstructura(){
-
-    punteroMatriz = new int *[tamaño]; //reservamos memoria para las filas
-    for(int i = 0 ;i < tamaño ; i++){
-        punteroMatriz[i] = new int [tamaño];//reservamos memoria para las columnas
-    }
-
-}
-
-
-void llenarEstructura(){
-
-    int variableDeLLenado = 1; int centro;
-
-    centro = tamaño/2;
-
-    for (int i = 0; i < tamaño; i++) {
-        for (int j = 0; j < tamaño; j++) {
-            if (centro == i && centro == j) {
-                punteroMatriz[i][j] = 0;
-            } else {
-                punteroMatriz[i][j] = variableDeLLenado++;
-            }
-        }
-    }
-}
-void mostrarMatriz(int **punteroMatriz, int tamaño) {
-    for (int i = 0; i < tamaño; i++) {
-        for (int j = 0; j < tamaño; j++) {
-            if (punteroMatriz[i][j] == 0) {
-                cout << "   "; // Imprime tres espacios en lugar de 0 para mantener la misma cantidad de caracteres
-            } else {
-                cout << punteroMatriz[i][j] << "  "; // Imprime el valor de la matriz seguido de dos espacios adicionales
-            }
-        }
-        cout << endl;
-    }
-}
-
-
-
+};*/
 
