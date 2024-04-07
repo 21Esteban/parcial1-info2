@@ -2,7 +2,7 @@
 
 //Variables Globales
 
-int **punteroMatriz,tamaño; int *reglaK;
+int **punteroMatriz,tamaño; int *reglaK; int ***cerraduraX;
 
 //cerradura K
 
@@ -10,15 +10,15 @@ int main()
 {
 
     //pedimos los datos para rellenar la estructura M
-    pedirDatos();
+    // pedirDatos();
     //creamos la estructura M
-    crearEstructura();
+    // crearEstructura();
     //rellenamos la estructura M
-    llenarEstructura();
+    // llenarEstructura();
     //mostramos la matriz;
-    mostrarMatriz(punteroMatriz,tamaño); //podemos comentar la matriz orginal M
+    // mostrarMatriz(punteroMatriz,tamaño); //podemos comentar la matriz orginal M
     pedirClaveK();
-
+    generadorDeEstructuraX();
 
 
 
@@ -38,120 +38,41 @@ int main()
 
 
 
-
-
-
-
-
-
-
-
-
-
 //Funciones para validar la regla K
 
 //El enfoque que vamos a utilizar es , el usuario va a ingresar la fila y la columna , de acuerdo a eso vamos a hacer una matriz de prueba para validar si podemos usar en la primera matriz la matriz minima (3x3) si el usuario da en el centro de la matriz entonces la primera estructura ya no va a ser de 3x3 sino de 5x5 y asi sucesivamente
 
-void validarReglaK(){
 
-   //definimos estas variables y las pasamos por referencia en la funcion pedir clave porque las necesitamos en esta funcion.
+// void generadorDeEstructuraX(){
 
+//     //Generamos una matriz estandar para evaluar si nos sirve para la cerradura X
+//     int num = 3; //Esta variable es el minimo de la matriz y si no se puede por la 3x3 sumamos 2 para probar con la 5x5
 
+//     bool matrizValida = false;
 
-
-
-    //Funcion que valida la regla dada pra la primera estructura
-
-
+//     while(!matrizValida){
 
 
+//         if(esCentro(reglaK[0], reglaK[1] , num) && esValida(reglaK[0], reglaK[1] , num)){
+//             matrizValida = true;
+//             cout<<"entre"<<endl;
 
-}
-
-
-/*void pedirClaveK(){
-    int tamañok ;
-    int fila;
-    int columna;
-    int valor;
-
-    cout<<"----Ingrese la clave para generar una cerradura para esa Clave---- \n que tamaño va a tener la cerradura : ";
-    cin>>tamañok;
-
-    //generamos el arreglo que va a contener la regla K
-
-    reglaK = new int[tamañok+1];
-
-
-    for (int i = 0 ; i <= tamañok ; i ++){
-
-        if(i == 0){
-            bool filaValida = false;
-            int PrimeraVez = true;
-
-            while(!filaValida){
-                cout<<(PrimeraVez ? "Ingrese la fila : " : "La fila debe ser un numero positivo")<<endl;
-                cin>>fila;
-                if(fila > 0){
-                    reglaK[0] = fila;
-                    filaValida = true;
-                }
-                else {
-                    PrimeraVez = false;
-                }
-
-
-            }
-        }
-
-
-        else if(i == 1){
-            bool columnaValida = false;
-            int PrimeraVez = true;
-
-            while(!columnaValida){
-                cout<<(PrimeraVez ? "Ingrese la columna : " : "La columna debe ser un numero positivo")<<endl;
-                cin>>columna;
-                if(columna > 0){
-                    reglaK[1] = columna;
-                    columnaValida = true;
-                }
-                else {
-                    PrimeraVez = false;
-                }
+//         }else{
+//             num = num + 2;
+//             cout<<"le sume 2"<<endl;
+//         }
 
 
 
-            }
-
-        }
-
-        else{
-            bool valorValido = false;
-            int PrimeraVez = true;
-
-            while(!valorValido){
-                cout<<(PrimeraVez ? "Ingrese el valor o condicion con respecto a la siguiente estructura : " : "la condicion debe estar en el rango -1 , 0 , 1")<<endl;
-                cin>>valor;
-                if(valor > 0){
-                    reglaK[i] = valor;
-                    valorValido = true;
-                }
-                else {
-                    PrimeraVez = false;
-                }
+//     }
 
 
-            }
-
-        }
+//     cout<<"Matriz valida la "<< num << " x "<< num <<endl;
 
 
 
-    }
+// }
 
-}
-*/
 
 
 
