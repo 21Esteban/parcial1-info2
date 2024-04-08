@@ -9,7 +9,7 @@ using namespace std;
 
 
 //int **punteroMatriz,tamaño; int *reglaK;
-extern int *reglaK;extern int ***cerraduraX;extern int tamañoK;
+extern int *reglaK;extern int ***cerraduraX;extern int tamañoCerradura;
 
 
 //prototipos

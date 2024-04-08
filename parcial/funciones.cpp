@@ -161,25 +161,23 @@ void girarIzquierda(int **punteroMatriz,  int veces,int tamaño)
 void pedirClaveK()
 {
 
-    int fila;
-    int columna;
+    int fila; //variable para ubicar la celda
+    int columna; //variable para ubicar la celda
     int valor;
 
     cout << "------  Ingrese la clave para generar una cerradura para esa Clave  ------ \n Cual es el tamano que va a tener la cerradura : ";
-    cin >> tamañoK;
+    cin >> tamañoCerradura;
 
     // generamos el arreglo que va a contener la regla K
-
-    reglaK = new int[tamañoK + 1];
+    //la regla K tiene una posicion mas por eso usamos la variable tamañoCerradura y le sumamos 1
+    reglaK = new int[tamañoCerradura + 1];
 
     // aprovechamos y generamos el arrayX que va a contener las matrices
-    cerraduraX = new int **[tamañoK];//OJO todavia no hemos reservado la memoria para lo de adentro de las matrices , eso lo hacemos en la funcion que genera las estructuras
+    cerraduraX = new int **[tamañoCerradura];//OJO todavia no hemos reservado la memoria para lo de adentro de las matrices , eso lo hacemos en la funcion que genera las estructuras
 
-
-
-    for (int i = 0; i <= tamañoK; i++)
+    //hacemos un bucle que se va a repetir el tamaño de la cerradura + 1 para pedir los valores para el arreglo de K al ser <=tamañoCerradura y i = 0 es lo mismo que tamañoCerradura + 1
+    for (int i = 0; i <= tamañoCerradura; i++)
     {
-
         if (i == 0)
         {
             bool filaValida = false;
@@ -253,7 +251,8 @@ void generadorDeEstructuraX()
 {
 
     int tamaño = 3;
-
+    int posiblesTamaños[] = {3,5,7,9,11,13,15};
+    
     bool matrizValida = false;
 
     while (!matrizValida)
@@ -320,14 +319,14 @@ void generadorDeEstructuraX()
 // Funcion encargada de completar la estructura X
 void llenarCerraduraX(int tamañoPrimeraEstructura)
 {
-
+    int tamañoPosibleMatriz = 0;
     cout<<"Celda  : "<<reglaK[0] << " ," <<reglaK[1]<<endl;
 
 
     // La cerradura se va a ir llenando de acuerdo a la condicion dada en la claveK
 
    // int primeraCondicion = reglaK[2];
-    int tamañoPosibleMatriz  = 3;
+     tamañoPosibleMatriz  = tamañoPrimeraEstructura+2;
 
 
     // generamos una posible matriz para cumplir con la condicion de la claveK
@@ -337,7 +336,7 @@ void llenarCerraduraX(int tamañoPrimeraEstructura)
 
     int variableQueEntraCerradura = 0;
 
-    for (int i = 2; i < tamañoK; i++)
+    for (int i = 2; i < tamañoCerradura; i++)
     {
 
         bool matrizValida = false;
@@ -369,16 +368,17 @@ void llenarCerraduraX(int tamañoPrimeraEstructura)
 
                 cerraduraX[variableQueEntraCerradura] = new int*[tamañoPosibleMatriz] ;//en la posicion i-1 (1) vamos a guardar tamaño espacio de memoria
                 for (int g = 0; g < tamañoPosibleMatriz; ++g) {
-                    cerraduraX[1][g] = new int[tamañoPosibleMatriz]; //ahora entramos a la primera matriz y asignamos o guardamos t espacio para las columnas
+                    cerraduraX[variableQueEntraCerradura][g] = new int[tamañoPosibleMatriz]; //ahora entramos a la primera matriz y asignamos o guardamos t espacio para las columnas
                 }
 
                 for(int x = 0; x <tamañoPosibleMatriz;x++){
                     for(int y = 0; y<tamañoPosibleMatriz;y++  ){
-                        cout<<*(*(*(cerraduraX+1)+0)+0);
+                        // cout<<*(*(*(cerraduraX+1)+0)+0);
+
                         cerraduraX[variableQueEntraCerradura][x][y] = posibleMatriz[x][y];
-                        cerraduraX[variableQueEntraCerradura][x][y] = posibleMatriz[x][y];
-                        cout<<cerraduraX[variableQueEntraCerradura][x][y]<<endl;
+                        cout<<cerraduraX[variableQueEntraCerradura][x][y];
                     }
+                    cout<<endl;
                 }
 
             }else{

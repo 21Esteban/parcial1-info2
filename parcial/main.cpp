@@ -2,7 +2,7 @@
 
 //Variables Globales
 
- int *reglaK; int ***cerraduraX;int tamañoK;
+ int *reglaK; int ***cerraduraX;int tamañoCerradura;
 
 //cerradura K
 
