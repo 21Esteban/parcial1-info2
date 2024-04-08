@@ -2,7 +2,7 @@
 
 //Variables Globales
 
-int **punteroMatriz,tamaño; int *reglaK; int ***cerraduraX;
+ int *reglaK; int ***cerraduraX;int tamañoK;
 
 //cerradura K
 
@@ -23,13 +23,13 @@ int main()
 
 
     //liberamos la memoria usada para las columnas
-    for(int i = 0; i<tamaño ; i++){
-        delete[]  punteroMatriz[i] ;
-    }
+    // for(int i = 0; i<tamaño ; i++){
+    //     delete[]  punteroMatriz[i] ;
+    // }
 
     //ahora liberamos las filas
 
-    delete[] punteroMatriz;
+    // delete[] punteroMatriz;
 
     return 0;
     
