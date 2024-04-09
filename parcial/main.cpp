@@ -2,21 +2,14 @@
 
 //Variables Globales
 
-int *reglaK; int ***cerraduraX;int tamañoK;
+int *reglaK; int ***cerraduraX;int tamañoCerradura;
 
 //cerradura K
 
 int main()
 {
 
-    //pedimos los datos para rellenar la estructura M
-    // pedirDatos();
-    //creamos la estructura M
-    // crearEstructura();
-    //rellenamos la estructura M
-    // llenarEstructura();
-    //mostramos la matriz;
-    // mostrarMatriz(punteroMatriz,tamaño); //podemos comentar la matriz orginal M
+
     pedirClaveK();
     generadorDeEstructuraX();
 
@@ -101,4 +94,3 @@ int main()
         {0, 0, 0}
     }
 };*/
-

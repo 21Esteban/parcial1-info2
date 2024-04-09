@@ -2,19 +2,27 @@
 
 int **crearEstructura(int tamaño)
 {
-    //creamos la matriz
+    // creamos la matriz
     int **punteroMatriz = new int *[tamaño]; // reservamos memoria para las filas
     for (int i = 0; i < tamaño; i++)
     {
         punteroMatriz[i] = new int[tamaño]; // reservamos memoria para las columnas
     }
 
-    //ahora vamos a llenar la matriz para incorporarla en la cerraduraX
+    // ahora vamos a llenar la matriz para incorporarla en la cerraduraX
 
-    llenarEstructura(punteroMatriz,tamaño);
+    llenarEstructura(punteroMatriz, tamaño);
 
     return punteroMatriz;
+}
 
+void liberarArreglo(int** arreglo,int filas) {
+
+
+    for (int i = 0; i < filas; ++i) {
+        delete[] arreglo[i]; // Liberar cada fila del arreglo
+    }
+    delete[] arreglo; // Liberar el arreglo en sí
 }
 
 
@@ -41,7 +49,7 @@ int **crearEstructura(int tamaño)
 //     }
 // }
 
-void llenarEstructura(int **punteroMatriz,int tamaño)
+void llenarEstructura(int **punteroMatriz, int tamaño)
 {
 
     int variableDeLLenado = 1;
@@ -60,7 +68,7 @@ void llenarEstructura(int **punteroMatriz,int tamaño)
             else
             {
                 punteroMatriz[i][j] = variableDeLLenado++;
-                //cout<<punteroMatriz[i][j];
+                // cout<<punteroMatriz[i][j];
             }
         }
     }
@@ -85,8 +93,32 @@ void mostrarMatriz(int **punteroMatriz, int tamaño)
     }
 }
 
-void girarIzquierda(int **punteroMatriz, int tamaño, int veces)
+void mostrarMatrizConLibreria(int **punteroMatriz, int tamaño)
 {
+    for (int i = 0; i < tamaño; i++)
+    {
+        for (int j = 0; j < tamaño; j++)
+        {
+            if (punteroMatriz[i][j] == 0)
+            {
+                cout <<  setw(4)<<" "; // Imprime tres espacios en lugar de 0 para mantener la misma cantidad de caracteres
+            }
+            else
+            {
+                cout << setw(4) <<punteroMatriz[i][j]; // Ajusta el ancho de cada elemento para una mejor alineación
+            }
+        }
+        cout << endl;
+    }
+}
+
+void girarIzquierda(int **punteroMatriz,  int veces,int tamaño)
+{
+
+    //calculamos el tamaño de la matriz entrante
+
+
+
     for (int k = 0; k < veces; ++k)
     {
         int **temp = new int *[tamaño];
@@ -115,6 +147,10 @@ void girarIzquierda(int **punteroMatriz, int tamaño, int veces)
         }
         // Liberamos las filas en la matriz temporal
         delete[] temp;
+
+        //-----------------//
+        mostrarMatrizConLibreria(punteroMatriz,tamaño);
+
     }
 }
 
@@ -125,23 +161,23 @@ void girarIzquierda(int **punteroMatriz, int tamaño, int veces)
 void pedirClaveK()
 {
 
-    int fila;
-    int columna;
+    int fila; //variable para ubicar la celda
+    int columna; //variable para ubicar la celda
     int valor;
 
     cout << "------  Ingrese la clave para generar una cerradura para esa Clave  ------ \n Cual es el tamano que va a tener la cerradura : ";
-    cin >> tamañoK;
+    cin >> tamañoCerradura;
 
     // generamos el arreglo que va a contener la regla K
+    //la regla K tiene una posicion mas por eso usamos la variable tamañoCerradura y le sumamos 1
+    reglaK = new int[tamañoCerradura + 1];
 
-    reglaK = new int[tamañoK + 1];
+    // aprovechamos y generamos el arrayX que va a contener las matrices
+    cerraduraX = new int **[tamañoCerradura];//OJO todavia no hemos reservado la memoria para lo de adentro de las matrices , eso lo hacemos en la funcion que genera las estructuras
 
-    //aprovechamos y generamos el arrayX que va a contener las matrices
-    cerraduraX = new int **[tamañoK];
-
-    for (int i = 0; i <= tamañoK; i++)
+    //hacemos un bucle que se va a repetir el tamaño de la cerradura + 1 para pedir los valores para el arreglo de K al ser <=tamañoCerradura y i = 0 es lo mismo que tamañoCerradura + 1
+    for (int i = 0; i <= tamañoCerradura; i++)
     {
-
         if (i == 0)
         {
             bool filaValida = false;
@@ -153,7 +189,7 @@ void pedirClaveK()
                 cin >> fila;
                 if (fila > 0)
                 {
-                    reglaK[0] = fila - 1 ;
+                    reglaK[0] = fila - 1;
                     filaValida = true;
                 }
                 else
@@ -207,71 +243,119 @@ void pedirClaveK()
     }
 }
 
-//Funciones para validar la regla K
-
-//El enfoque que vamos a utilizar es , el usuario va a ingresar la fila y la columna , de acuerdo a eso vamos a hacer una matriz de prueba para validar si podemos usar en la primera matriz la matriz minima (3x3) si el usuario da en el centro de la matriz entonces la primera estructura ya no va a ser de 3x3 sino de 5x5 y asi sucesivamente
-
-void generadorDeEstructuraX(){
-
-
-    int tamaño = 3;
-
-    bool matrizValida = false;
-
-    while(!matrizValida){
-
-
-        if(esCentro(reglaK[0], reglaK[1] , tamaño) ==false && esValida(reglaK[0], reglaK[1] , tamaño) == true){
-            matrizValida = true;
-            //cout<<"entre"<<endl;
-
-        }else{
-            tamaño = tamaño + 2;
-            cout<<"le sume 2"<<endl;
-        }
 
 
 
+void generadorDeEstructuraX()
+{
+
+    //sacamos la longitud del arregloK
+
+    int tamaño = tamañoCerradura - 1;
+    int *condiciones = new int[tamaño];
+    int *configuracion = new int[tamaño];
+    //metemos en condiciones los valores de reglak desde el 2 hasta tamañoCerradura+1
+    for(int i = 0; i <= tamaño ; i++){
+        condiciones[i] = reglaK[i+2];
     }
 
+    encontrar_valores(tamañoCerradura,condiciones,configuracion);
 
-    cout<<"Matriz valida para la primera estructura "<< tamaño << " x "<< tamaño <<endl;
+    //aqui ya podemos eliminar la memoria de condiciones
+    delete [] condiciones;
 
-    //ahora una vez ya sepamos cual matriz podemos usar para la primera estructura de X, procedemos a incorporarla.
+    //ahora que ya sabemos una posible configuracion para la cerradura X simplemente reservamos la memoria necesaria para cada matriz
 
-    cerraduraX[0] = crearEstructura(tamaño); //esta funcion tambien tiene la implementación para llenar esa matriz , ahora tenemos que llenar el arreglo o cerraduraX con esa matriz generada.
+    for(int j = 0 ; j<tamañoCerradura; j++){
+        cerraduraX[j] = new int*[configuracion[j]];
 
-    //imprimimos la matriz para ver que esta pasando
+        for(int k = 0 ; k <configuracion[j] ; k++){
+            cerraduraX[j][k] = new int[configuracion[j]];
 
-    //recorremos la cerradura
-    for(int i=0 ; i < tamañoK ; i++){
-        //recorremos las filas
-        for(int j = 0 ; j< tamaño ; j++){
-            //recorremos las columnas
-            for(int k = 0 ; k<tamaño; k++){
-                cout<<cerraduraX[i][j][k];
+        }
+    }
+
+    //ahora llenamos cada matriz de la cerradura
+
+    llenarCerraduraX(configuracion);
+
+
+    //liberamos la memoria del arreglo configuracion
+
+    delete[] configuracion;
+
+}
+
+// Funcion encargada de completar la estructura X
+void llenarCerraduraX(int*configuracion)
+{
+    for(int i = 0;i<tamañoCerradura;i++){
+        llenarEstructura(cerraduraX[i],configuracion[i]);
+        mostrarMatrizConLibreria(cerraduraX[i],configuracion[i]);
+        //mostrarMatriz(cerraduraX[i],configuracion[i]);
+        cout<<endl;
+    }
+
+}
+
+
+
+
+//Modulo encargado de generar las posibles combinaciones para la cerradura
+
+
+// Función para encontrar los valores que cumplen con las condiciones dadas
+void encontrar_valores(int num_bucles, int condiciones[],int *configuracion) {
+    int* valores = new int[num_bucles]; // Arreglo dinámico para almacenar los valores
+    for (int i = 0; i < num_bucles; ++i) {
+        valores[i] = 3; // Inicializa todos los valores en 3 que es la minima que podemos hacer
+    }
+
+    while (true) {
+        // Verifica si las condiciones se cumplen
+        bool condiciones_cumplidas = true;
+        for (int i = 0; i < num_bucles - 1; ++i) {
+            int condicion = condiciones[i];
+            if (condicion == 1 && !(valores[i] > valores[i + 1])) {
+                condiciones_cumplidas = false;
+                break;
+            } else if (condicion == -1 && !(valores[i] < valores[i + 1])) {
+                condiciones_cumplidas = false;
+                break;
+            } else if (condicion == 0 && !(valores[i] == valores[i + 1])) {
+                condiciones_cumplidas = false;
+                break;
             }
-            cout<<endl;
         }
 
+        if (condiciones_cumplidas) {
+            // Imprime los valores que cumplen las condiciones
+            cout << "Valores que cumplen las condiciones: ";
+            for (int i = 0; i < num_bucles; ++i) {
+                configuracion[i] = valores[i];
+                cout << valores[i];
+                if (i != num_bucles - 1) {
+                    cout << ", ";
+                }
+            }
+            cout << endl;
+            delete[] valores; // Libera la memoria del arreglo dinámico
+            return; // Finaliza la ejecución después de encontrar una solución
+        }
+
+        // Incrementa los valores en el arreglo
+        for (int i = 0; i < num_bucles; ++i) {
+            valores[i] += 2;
+            if (valores[i] >= 10) {
+                valores[i] = 3;
+            } else {
+                break;
+            }
+        }
     }
-
-
-
-
-
-
 }
 
 
-//validador para generar la primera matriz de la cerradura.
 
-bool esCentro(int fila, int columna, int tamañoMatriz) {
-    bool centro = (fila == tamañoMatriz / 2) && (columna == tamañoMatriz / 2);
-    return centro;
-}
 
-bool esValida(int fila, int columna, int tamañoMatriz) {
-    bool valida = (fila >= 0 && fila < tamañoMatriz) && (columna >= 0 && columna < tamañoMatriz);
-    return valida;
-}
+
