@@ -8,31 +8,30 @@
 using namespace std;
 
 
-//int **punteroMatriz,tamaño; int *reglaK;
-extern int *reglaK;extern int ***cerraduraX;extern int tamañoCerradura;
+//int **punteroMatriz,tamano; int *reglaK;
+extern int *reglaK;extern int ***cerraduraX;extern int tamanoCerradura;
 
 
 //prototipos
 
 // void pedirDatos();
-int **crearEstructura(int tamaño);
+int **crearEstructura(int tamano);
 void liberarArreglo(int** arreglo);
-void llenarEstructura(int **punteroMatriz,int tamaño);
-void mostrarMatriz(int **punteroMatriz,int tamaño);
+void llenarEstructura(int **punteroMatriz,int tamano);
+//void mostrarMatriz(int **punteroMatriz,int tamano);
 
-void mostrarMatrizConLibreria(int **punteroMatriz, int tamaño);
+void mostrarMatrizConLibreria(int **punteroMatriz, int tamano);
 
 
 void girarIzquierda(int **punteroMatriz, int veces);
 
 void pedirClaveK();
+void encontrar_valores(int num_bucles, int condiciones[],int *configuracion);
 void generadorDeEstructuraX();
-void llenarCerraduraX(int tamañoPrimeraEstructura);
-// void crearEstructuraGenerica(int tamaño1);
+void llenarCerraduraX(int*configuracion);
+// void crearEstructuraGenerica(int tamano1);
 
-bool esCentro(int fila, int columna, int tamañoMatriz);
-bool esValida(int fila, int columna, int tamañoMatriz);
-//variables globales
+
 
 
 
